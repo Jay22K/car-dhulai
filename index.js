@@ -6,12 +6,19 @@ const MongoStore = require("connect-mongo");
 const passport = require('passport');
 const flash = require("connect-flash");
 const flashmiddleware = require('./config/flash');
+const fs = require('fs');
+const https = require('https');
+
 
 // load Express
 const express = require("express");
 const app = express();
-app.use(express.json());
 
+const options = {
+  key: fs.readFileSync('cert/private-key.pem'),
+  cert: fs.readFileSync('cert/certificate.pem')
+};
+app.use(express.json());
 // Set Session and Passport
 const session = require('express-session');
 app.use(session({
@@ -53,6 +60,11 @@ const apiRoute = require("./routes/apiRoutes");
 app.use('/api', apiRoute);
 
 // Set Port and Start Server
-app.listen(process.env.PORT,function(){
-    console.log("Server is Running  on 8400");
+// app.listen(process.env.PORT,function(){
+//     console.log("Server is Running  on 8400");
+// });
+
+// HTTPS server ko start karein
+https.createServer(options, app).listen(443, () => {
+    console.log('Server running on https://localhost:443');
 });

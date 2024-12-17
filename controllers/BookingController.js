@@ -16,7 +16,13 @@ module.exports.loadBooking = async (req, res) => {
         let loginData = await Admin.find({});
         const currency = await Currency.findOne({});
         //const booking = await BookingVehicle.find({}).populate('userId', 'username image').populate('serviceId','name image').populate('packageId','title image price').populate('vehicleId','vehicle_name vehicle_number');
-        const booking = await BookingVehicle.find({});
+        const booking = await BookingVehicle.find({}).sort({
+            createdAt: -1
+        })
+
+    //    return res.json({
+    //         data: booking
+    //     })
         res.render('viewBooking', { booking: booking, loginData: loginData, currency: currency });
     } catch (error) {
         console.log(error.message);
