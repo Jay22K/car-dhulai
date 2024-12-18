@@ -15,8 +15,8 @@ const express = require("express");
 const app = express();
 
 const options = {
-  key: fs.readFileSync('cert/private-key.pem'),
-  cert: fs.readFileSync('cert/certificate.pem')
+    cert: fs.readFileSync('cert/certificate.crt'),    // SSL Certificate
+    key: fs.readFileSync('cert/private-key.key'),     // Private Key
 };
 app.use(express.json());
 // Set Session and Passport
