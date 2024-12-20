@@ -80,7 +80,7 @@ const SendOTP = async (name, email, OTP) => {
         const transporter = nodemailer.createTransport({
             host: smtp.host,
             port: smtp.port,
-            secure: false,
+            secure: true,
             requireTLS: true,
             auth: {
                 user: smtp.email,
