@@ -73,6 +73,8 @@ module.exports.VerifyRegisteredUser = async (req, res) => {
     }
 }
 
+
+
 // Send OTP
 const SendOTP = async (name, email, OTP) => {
     try {
@@ -87,6 +89,7 @@ const SendOTP = async (name, email, OTP) => {
                 pass: smtp.password
             }
         });
+
         const handlebarOptions = {
             viewEngine: {
                 partialsDir: path.resolve('./views/mail-templates/user-auth/'),
